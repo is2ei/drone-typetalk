@@ -12,6 +12,12 @@ Drone plugin for sending Typetalk notifications.
 [drone]: https://cloud.drone.io/is2ei/drone-typetalk
 [goreport]: https://goreportcard.com/report/github.com/is2ei/drone-typetalk
 
+## Build image
+
+```
+docker build -t is2ei/drone-typetalk .
+```
+
 ## Testing the plugin
 
 ```
