@@ -10,3 +10,14 @@ steps:
   image: golang
   commands:
   - go test ./...
+
+steps:
+- name: typetalk
+  image: is2ei/drone-typetalk
+  environment:
+    TYPETALK_TOKEN:
+      from_secret: typetalk_token
+    TOPIC_ID:
+      from_secret: topic_id
+    MESSAGE:
+      from_secret: message
