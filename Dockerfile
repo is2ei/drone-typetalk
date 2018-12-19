@@ -1,4 +1,4 @@
 FROM alpine
-ADD typetalk /bin/
+ADD drone-typetalk /bin/
 RUN apk -Uuv add ca-certificates
-ENTRYPOINT /bin/typetalk
+ENTRYPOINT ["/bin/drone-typetalk"]

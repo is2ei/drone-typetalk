@@ -17,5 +17,5 @@ docker run --rm \
   -e TYPETALK_TOKEN=xxxxxxxx \
   -e TOPIC_ID=12345 \
   -e MESSAGE="hello world" \
-  is2ei/typetalk
+  is2ei/drone-typetalk
 ```
