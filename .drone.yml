@@ -15,7 +15,7 @@ steps:
 - name: typetalk
   image: is2ei/drone-typetalk
   settings:
-    typetalk_tolkn:
+    typetalk_token:
       from_secret: typetalk_token
     topic_id:
       from_secret: topic_id
