@@ -9,12 +9,32 @@ import (
 	"os"
 )
 
+type (
+
+	// Build contains build information.
+	Build struct {
+		Status string
+	}
+)
+
 func main() {
 	token := os.Getenv("PLUGIN_TYPETALK_TOKEN")
 	topicID := os.Getenv("PLUGIN_TOPIC_ID")
-	message := os.Getenv("PLUGIN_MESSAGE")
+	template := os.Getenv("PLUGIN_TEMPLATE")
+
+	build := &Build{
+		Status: os.Getenv("DRONE_BUILD_STATUS"),
+	}
 
 	endPoint := fmt.Sprintf("https://typetalk.com/api/v1/topics/%s?typetalkToken=%s", topicID, token)
+
+	var message string
+
+	if template == "" {
+		message = fmt.Sprintf("%s",
+			build.Status,
+		)
+	}
 
 	msg := struct {
 		Message string `json:"message"`

@@ -19,5 +19,3 @@ steps:
       from_secret: typetalk_token
     topic_id:
       from_secret: topic_id
-    message:
-      from_secret: message
