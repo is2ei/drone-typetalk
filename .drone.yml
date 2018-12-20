@@ -14,10 +14,10 @@ steps:
 steps:
 - name: typetalk
   image: is2ei/drone-typetalk
-  environment:
-    TYPETALK_TOKEN:
+  settings:
+    typetalk_talkn:
       from_secret: typetalk_token
-    TOPIC_ID:
+    topic_id:
       from_secret: topic_id
-    MESSAGE:
+    message:
       from_secret: message

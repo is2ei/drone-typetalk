@@ -10,9 +10,9 @@ import (
 )
 
 func main() {
-	token := os.Getenv("TYPETALK_TOKEN")
-	topicID := os.Getenv("TOPIC_ID")
-	message := os.Getenv("MESSAGE")
+	token := os.Getenv("PLUGIN_TYPETALK_TOKEN")
+	topicID := os.Getenv("PLUGIN_TOPIC_ID")
+	message := os.Getenv("PLUGIN_MESSAGE")
 
 	endPoint := fmt.Sprintf("https://typetalk.com/api/v1/topics/%s?typetalkToken=%s", topicID, token)
 

@@ -12,18 +12,16 @@ Drone plugin for sending Typetalk notifications.
 [drone]: https://cloud.drone.io/is2ei/drone-typetalk
 [goreport]: https://goreportcard.com/report/github.com/is2ei/drone-typetalk
 
-## Build image
+## Usage
+
+The Typetalk plugin posts build status messages to your channel. The below configuration demonstrates  
+simple usage.
 
 ```
-docker build -t is2ei/drone-typetalk .
-```
-
-## Testing the plugin
-
-```
-docker run --rm \
-  -e TYPETALK_TOKEN=xxxxxxxx \
-  -e TOPIC_ID=12345 \
-  -e MESSAGE="hello world" \
-  is2ei/drone-typetalk
+steps:
+- name: typetalk
+  image: is2ei/typetalk
+  settings:
+    typetalk_token: xxxxxxxx
+    topic_id: 12345
 ```
