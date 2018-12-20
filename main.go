@@ -13,7 +13,8 @@ type (
 
 	// Repo contains repository information.
 	Repo struct {
-		Name string
+		Owner string
+		Name  string
 	}
 
 	// Build contains build information.
