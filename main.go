@@ -11,6 +11,11 @@ import (
 
 type (
 
+	// Repo contains repository information.
+	Repo struct {
+		Name string
+	}
+
 	// Build contains build information.
 	Build struct {
 		Status string
@@ -22,6 +27,10 @@ func main() {
 	topicID := os.Getenv("PLUGIN_TOPIC_ID")
 	template := os.Getenv("PLUGIN_TEMPLATE")
 
+	repo := &Repo{
+		Name: os.Getenv("DRONE_REPO_NAME"),
+	}
+
 	build := &Build{
 		Status: os.Getenv("DRONE_BUILD_STATUS"),
 	}
@@ -31,7 +40,8 @@ func main() {
 	var message string
 
 	if template == "" {
-		message = fmt.Sprintf("%s",
+		message = fmt.Sprintf("[%s] %s",
+			repo.Name,
 			build.Status,
 		)
 	}
