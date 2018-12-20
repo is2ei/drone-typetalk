@@ -29,7 +29,8 @@ func main() {
 	template := os.Getenv("PLUGIN_TEMPLATE")
 
 	repo := &Repo{
-		Name: os.Getenv("DRONE_REPO_NAME"),
+		Owner: os.Getenv("DRONE_REPO_OWNER"),
+		Name:  os.Getenv("DRONE_REPO_NAME"),
 	}
 
 	build := &Build{
@@ -41,7 +42,8 @@ func main() {
 	var message string
 
 	if template == "" {
-		message = fmt.Sprintf("[%s] %s",
+		message = fmt.Sprintf("[%s/%s] %s",
+			repo.Owner,
 			repo.Name,
 			build.Status,
 		)
