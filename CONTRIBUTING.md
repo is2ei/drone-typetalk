@@ -1,15 +1,15 @@
 ## Build image
 
 ```
-docker build -t is2ei/drone-typetalk .
+make build
 ```
 
 ## Testing the plugin
 
 ```
 docker run --rm \
-  -e TYPETALK_TOKEN=xxxxxxxx \
-  -e TOPIC_ID=12345 \
-  -e MESSAGE="hello world" \
+  -e PLUGIN_TYPETALK_TOKEN=xxxxxxxx \
+  -e PLUGIN_TOPIC_ID=12345 \
+  -e PLUGIN_MESSAGE="hello world" \
   is2ei/drone-typetalk
 ```
