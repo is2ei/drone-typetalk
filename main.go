@@ -27,6 +27,7 @@ type (
 	// Build contains build information.
 	Build struct {
 		Status string
+		Link   string
 	}
 
 	// PostMessageRequestParam contains parameters for POST reqeust
@@ -37,12 +38,13 @@ type (
 )
 
 func buildDefaultMessage(repo *Repo, build *Build) string {
-	return fmt.Sprintf("[[%s/%s](%s):%s] %s",
+	return fmt.Sprintf("[[%s/%s](%s):%s] [%s](%s)",
 		repo.Owner,
 		repo.Name,
 		repo.Link,
 		repo.Branch,
 		build.Status,
+		build.Link,
 	)
 }
 
@@ -86,6 +88,7 @@ func main() {
 
 	build := &Build{
 		Status: os.Getenv("DRONE_BUILD_STATUS"),
+		Link:   os.Getenv("DRONE_BUILD_LINK"),
 	}
 
 	var message string
