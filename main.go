@@ -15,6 +15,7 @@ type (
 	Repo struct {
 		Owner string
 		Name  string
+		Link  string
 	}
 
 	// Build contains build information.
@@ -22,6 +23,15 @@ type (
 		Status string
 	}
 )
+
+func buildDefaultMessage(repo *Repo, build *Build) string {
+	return fmt.Sprintf("[[%s/%s](%s)] %s",
+		repo.Owner,
+		repo.Name,
+		repo.Link,
+		build.Status,
+	)
+}
 
 func main() {
 	token := os.Getenv("PLUGIN_TYPETALK_TOKEN")
@@ -31,6 +41,7 @@ func main() {
 	repo := &Repo{
 		Owner: os.Getenv("DRONE_REPO_OWNER"),
 		Name:  os.Getenv("DRONE_REPO_NAME"),
+		Link:  os.Getenv("DRONE_REPO_LINK"),
 	}
 
 	build := &Build{
@@ -42,11 +53,7 @@ func main() {
 	var message string
 
 	if template == "" {
-		message = fmt.Sprintf("[%s/%s] %s",
-			repo.Owner,
-			repo.Name,
-			build.Status,
-		)
+		message = buildDefaultMessage(repo, build)
 	}
 
 	msg := struct {

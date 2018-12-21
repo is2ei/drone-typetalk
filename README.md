@@ -25,3 +25,8 @@ steps:
     typetalk_token: xxxxxxxx
     topic_id: 12345
 ```
+
+## Parameters Reference
+
+`typetalk_token`
+[Typetalk Token](https://developer.nulab-inc.com/docs/typetalk/#tttoken)
