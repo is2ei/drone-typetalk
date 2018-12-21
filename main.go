@@ -9,6 +9,10 @@ import (
 	"os"
 )
 
+const (
+	baseURL = "https://typetalk.com"
+)
+
 type (
 
 	// Repo contains repository information.
@@ -23,10 +27,8 @@ type (
 		Status string
 	}
 
-	// PostMessageParam contains parameters for POST reqeust
-	//
-	// Typetalk API docs: https://developer.nulab-inc.com/docs/typetalk/api/1/post-message/
-	PostMessageParam struct {
+	// PostMessageRequestParam contains parameters for POST reqeust
+	PostMessageRequestParam struct {
 		Message      string `json:"message"`
 		ShowLinkMeta bool   `json:"showLinkMeta,omitempty"`
 	}
@@ -41,28 +43,35 @@ func buildDefaultMessage(repo *Repo, build *Build) string {
 	)
 }
 
-func postMessage(apiEndPoint string, p *PostMessageParam) {
+// PostMessage posts a message to Typetalk
+//
+// Typetalk API docs: https://developer.nulab-inc.com/docs/typetalk/api/1/post-message/
+func PostMessage(baseURL, topicID, token string, p *PostMessageRequestParam) (*http.Response, error) {
+
+	apiEndPoint := fmt.Sprintf("%s/api/v1/topics/%s?typetalkToken=%s",
+		baseURL,
+		topicID,
+		token,
+	)
+
 	raw, err := json.Marshal(p)
 	if err != nil {
 		log.Fatalln(err)
 	}
 
 	resp, err := http.Post(apiEndPoint, "application/json", bytes.NewReader(raw))
+	if err != nil {
+		return nil, err
+	}
+
 	if resp != nil {
 		resp.Body.Close()
 	}
 
-	if err != nil {
-		log.Fatalln(err)
-	}
+	return resp, err
 }
 
 func main() {
-
-	apiEndPoint := fmt.Sprintf("https://typetalk.com/api/v1/topics/%s?typetalkToken=%s",
-		os.Getenv("PLUGIN_TYPETALK_TOKEN"),
-		os.Getenv("PLUGIN_TOPIC_ID"),
-	)
 
 	repo := &Repo{
 		Owner: os.Getenv("DRONE_REPO_OWNER"),
@@ -81,10 +90,15 @@ func main() {
 		message = buildDefaultMessage(repo, build)
 	}
 
-	p := &PostMessageParam{
+	p := &PostMessageRequestParam{
 		Message:      message,
 		ShowLinkMeta: false,
 	}
 
-	postMessage(apiEndPoint, p)
+	PostMessage(
+		baseURL,
+		os.Getenv("PLUGIN_TOPIC_ID"),
+		os.Getenv("PLUGIN_TYPETALK_TOKEN"),
+		p,
+	)
 }
