@@ -17,9 +17,11 @@ type (
 
 	// Repo contains repository information.
 	Repo struct {
-		Owner string
-		Name  string
-		Link  string
+		Owner    string
+		FullName string
+		Name     string
+		Branch   string
+		Link     string
 	}
 
 	// Build contains build information.
@@ -35,10 +37,11 @@ type (
 )
 
 func buildDefaultMessage(repo *Repo, build *Build) string {
-	return fmt.Sprintf("[[%s/%s](%s)] %s",
+	return fmt.Sprintf("[[%s/%s](%s):%s] %s",
 		repo.Owner,
 		repo.Name,
 		repo.Link,
+		repo.Branch,
 		build.Status,
 	)
 }
@@ -74,9 +77,11 @@ func PostMessage(baseURL, topicID, token string, p *PostMessageRequestParam) (*h
 func main() {
 
 	repo := &Repo{
-		Owner: os.Getenv("DRONE_REPO_OWNER"),
-		Name:  os.Getenv("DRONE_REPO_NAME"),
-		Link:  os.Getenv("DRONE_REPO_LINK"),
+		Owner:    os.Getenv("DRONE_REPO_OWNER"),
+		FullName: os.Getenv("DRONE_REPO"),
+		Name:     os.Getenv("DRONE_REPO_NAME"),
+		Branch:   os.Getenv("DRONE_REPO_BRANCH"),
+		Link:     os.Getenv("DRONE_REPO_LINK"),
 	}
 
 	build := &Build{
