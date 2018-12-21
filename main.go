@@ -26,6 +26,7 @@ type (
 
 	// Build contains build information.
 	Build struct {
+		Number string
 		Status string
 		Link   string
 	}
@@ -38,11 +39,12 @@ type (
 )
 
 func buildDefaultMessage(repo *Repo, build *Build) string {
-	return fmt.Sprintf("[[%s/%s](%s):%s] [%s](%s)",
+	return fmt.Sprintf("[[%s/%s](%s):%s] [Build%s: %s](%s)",
 		repo.Owner,
 		repo.Name,
 		repo.Link,
 		repo.Branch,
+		build.Number,
 		build.Status,
 		build.Link,
 	)
@@ -87,6 +89,7 @@ func main() {
 	}
 
 	build := &Build{
+		Number: os.Getenv("DRONE_BUILD_NUMBER"),
 		Status: os.Getenv("DRONE_BUILD_STATUS"),
 		Link:   os.Getenv("DRONE_BUILD_LINK"),
 	}
