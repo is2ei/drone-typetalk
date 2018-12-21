@@ -57,9 +57,11 @@ func main() {
 	}
 
 	msg := struct {
-		Message string `json:"message"`
+		Message      string `json:"message"`
+		ShowLinkMeta bool   `json:"showLinkMeta,omitempty"`
 	}{
-		Message: message,
+		Message:      message,
+		ShowLinkMeta: false,
 	}
 
 	raw, err := json.Marshal(msg)
