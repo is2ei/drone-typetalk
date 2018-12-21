@@ -41,14 +41,28 @@ func buildDefaultMessage(repo *Repo, build *Build) string {
 	)
 }
 
-func postMessage(message string, showLinkMeta bool) {
+func postMessage(apiEndPoint string, p *PostMessageParam) {
+	raw, err := json.Marshal(p)
+	if err != nil {
+		log.Fatalln(err)
+	}
 
+	resp, err := http.Post(apiEndPoint, "application/json", bytes.NewReader(raw))
+	if resp != nil {
+		resp.Body.Close()
+	}
+
+	if err != nil {
+		log.Fatalln(err)
+	}
 }
 
 func main() {
-	token := os.Getenv("PLUGIN_TYPETALK_TOKEN")
-	topicID := os.Getenv("PLUGIN_TOPIC_ID")
-	template := os.Getenv("PLUGIN_TEMPLATE")
+
+	apiEndPoint := fmt.Sprintf("https://typetalk.com/api/v1/topics/%s?typetalkToken=%s",
+		os.Getenv("PLUGIN_TYPETALK_TOKEN"),
+		os.Getenv("PLUGIN_TOPIC_ID"),
+	)
 
 	repo := &Repo{
 		Owner: os.Getenv("DRONE_REPO_OWNER"),
@@ -60,10 +74,9 @@ func main() {
 		Status: os.Getenv("DRONE_BUILD_STATUS"),
 	}
 
-	endPoint := fmt.Sprintf("https://typetalk.com/api/v1/topics/%s?typetalkToken=%s", topicID, token)
-
 	var message string
 
+	template := os.Getenv("PLUGIN_TEMPLATE")
 	if template == "" {
 		message = buildDefaultMessage(repo, build)
 	}
@@ -73,17 +86,5 @@ func main() {
 		ShowLinkMeta: false,
 	}
 
-	raw, err := json.Marshal(p)
-	if err != nil {
-		log.Fatalln(err)
-	}
-
-	resp, err := http.Post(endPoint, "application/json", bytes.NewReader(raw))
-	if resp != nil {
-		resp.Body.Close()
-	}
-
-	if err != nil {
-		log.Fatalln(err)
-	}
+	postMessage(apiEndPoint, p)
 }
