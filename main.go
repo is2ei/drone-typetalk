@@ -39,7 +39,7 @@ type (
 )
 
 func buildDefaultMessage(repo *Repo, build *Build) string {
-	return fmt.Sprintf("[[%s/%s](%s):%s] [Build%s: %s](%s)",
+	return fmt.Sprintf("[[%s/%s](%s):%s] [Build#%s: %s](%s)",
 		repo.Owner,
 		repo.Name,
 		repo.Link,
