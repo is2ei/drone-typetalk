@@ -28,5 +28,5 @@ steps:
 
 ## Parameters Reference
 
-`typetalk_token`
+`typetalk_token`  
 [Typetalk Token](https://developer.nulab-inc.com/docs/typetalk/#tttoken)

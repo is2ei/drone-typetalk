@@ -22,6 +22,14 @@ type (
 	Build struct {
 		Status string
 	}
+
+	// PostMessageParam contains parameters for POST reqeust
+	//
+	// Typetalk API docs: https://developer.nulab-inc.com/docs/typetalk/api/1/post-message/
+	PostMessageParam struct {
+		Message      string `json:"message"`
+		ShowLinkMeta bool   `json:"showLinkMeta,omitempty"`
+	}
 )
 
 func buildDefaultMessage(repo *Repo, build *Build) string {
@@ -31,6 +39,10 @@ func buildDefaultMessage(repo *Repo, build *Build) string {
 		repo.Link,
 		build.Status,
 	)
+}
+
+func postMessage(message string, showLinkMeta bool) {
+
 }
 
 func main() {
@@ -56,15 +68,12 @@ func main() {
 		message = buildDefaultMessage(repo, build)
 	}
 
-	msg := struct {
-		Message      string `json:"message"`
-		ShowLinkMeta bool   `json:"showLinkMeta,omitempty"`
-	}{
+	p := &PostMessageParam{
 		Message:      message,
 		ShowLinkMeta: false,
 	}
 
-	raw, err := json.Marshal(msg)
+	raw, err := json.Marshal(p)
 	if err != nil {
 		log.Fatalln(err)
 	}
