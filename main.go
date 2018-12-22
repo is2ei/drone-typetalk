@@ -73,6 +73,7 @@ type (
 		SourceBranch string
 		TargetBranch string
 		Tag          string
+		DeployTo     string
 	}
 
 	// Commit contains current commit information.
@@ -91,6 +92,11 @@ type (
 		Message      string
 	}
 
+	// Job contains job information.
+	Job struct {
+		Started string
+	}
+
 	// Env contains environment variables value.
 	Env struct {
 		Drone  *Drone
@@ -100,6 +106,7 @@ type (
 		Repo   *Repo
 		Build  *Build
 		Commit *Commit
+		Job    *Job
 	}
 
 	// PostMessageRequestParam contains parameters for POST reqeust
@@ -199,6 +206,7 @@ func main() {
 		SourceBranch: os.Getenv("DRONE_SOURCE_BRANCH"),
 		TargetBranch: os.Getenv("DRONE_TARGET_BRANCH"),
 		Tag:          os.Getenv("DRONE_TAG"),
+		DeployTo:     os.Getenv("DRONE_DEPLOY_TO"),
 	}
 
 	commit := &Commit{
@@ -216,6 +224,10 @@ func main() {
 		Ref:          os.Getenv("DRONE_COMMIT_REF"),
 	}
 
+	job := &Job{
+		Started: os.Getenv("DRONE_JOB_STARTED"),
+	}
+
 	env := &Env{
 		Drone:  drone,
 		System: system,
@@ -224,6 +236,7 @@ func main() {
 		Git:    git,
 		Build:  build,
 		Commit: commit,
+		Job:    job,
 	}
 
 	var message string
