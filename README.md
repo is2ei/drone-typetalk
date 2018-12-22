@@ -124,8 +124,17 @@ String literal, provides the repository http link. [DRONE_REPO_LINK](https://doc
 `.Repo.NameSpace`  
 String literal, provides the repository namespace (e.g. account owner) [DRONE_REPO_NAMESPACE](https://docs.drone.io/reference/environ/drone-repo-namespace/)  
 
-`.Build.Status`  
-build status type enumeration, either `success` or `failure` DRONE_BUILD_STATUS  
+`.Repo.Private`  
+Boolean value, indicates the repository is public or private. [DRONE_REPO_PRIVATE](https://docs.drone.io/reference/environ/drone-repo-private/)  
+
+`.Repo.SCM`  
+String literal, provides the repository version control system. [DRONE_REPO_SCM](String literal, provides the repository version control system.)  
+
+`.Build.Branch`  
+String literal, provides the branch for the current build. [DRONE_BRANCH](https://docs.drone.io/reference/environ/drone-branch/)  
+
+`.Build.Created`  
+Unix timestamp, provides the date and time when the build was created in the system. [DRONE_BUILD_CREATED](https://docs.drone.io/reference/environ/drone-build-created/)  
 
 `.Build.Event`  
 build event type enumeration, one of `push`, `pull_request`, `tag`, `deployment`  
@@ -133,3 +142,26 @@ build event type enumeration, one of `push`, `pull_request`, `tag`, `deployment`
 `.Build.Number`  
 Integer value, provides the current build number. [DRONE_BUILD_NUMBER](https://docs.drone.io/reference/environ/drone-build-number/)  
 
+`.Build.Started`  
+Unix timestamp, provides the date and time when the build was started. [DRONE_BUILD_STARTED](https://docs.drone.io/reference/environ/drone-build-started/)  
+
+`.Build.Status`  
+build status type enumeration, either `success` or `failure` DRONE_BUILD_STATUS  
+
+`.Build.Link`  
+DRONE_BUILD_LINK  
+
+`.Build.PullRequest`  
+Integer value, provides the pull request number for the current build. This value is only set if the build event is of type pull request. [DRONE_PULL_REQUEST](https://docs.drone.io/reference/environ/drone-pull-request/)  
+
+`.Build.SourceBranch`  
+String literal, provides the source branch for a pull request. [DRONE_SOURCE_BRANCH](https://docs.drone.io/reference/environ/drone-source-branch/)  
+
+`.Build.TargetBranch`  
+String literal, provides the target branch for a pull request. [DRONE_TARGET_BRANCH](https://docs.drone.io/reference/environ/drone-target-branch/)  
+
+`.Build.Tag`  
+String literal, provides the tag name for the current build. This value is only set if the build event is of type tag. [DRONE_TAG](https://docs.drone.io/reference/environ/drone-tag/)  
+
+`.Commit.Commit`  
+String literal, provides the commit sha for the current build. [DRONE_COMMIT](https://docs.drone.io/reference/environ/drone-commit/)  
