@@ -26,6 +26,19 @@ steps:
     topic_id: 12345
 ```
 
+Example configuration with webhook sourced from a secret:
+
+```
+steps:
+- name: typetalk
+  image: is2ei/typetalk
+  settings:
+    typetalk_token:
+      from_secret: typetalk_token
+    topic_id:
+      from_secret: topic_id
+```
+
 ## Parameters Reference
 
 `typetalk_token`  
