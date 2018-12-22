@@ -70,6 +70,12 @@ It uses `text/template` If both `template` and `template_raw` values are set, `t
 
 ## Template Raw Reference
 
+`.Drone.IsDrone`  
+Boolean value, indicates the runtime environment is Drone. [DRONE](https://docs.drone.io/reference/environ/drone/)  
+
+`.Drone.Hostname`  
+String literal, provides the Drone agent hostname. [DRONE_MACHINE](https://docs.drone.io/reference/environ/drone-machine/)  
+
 `.Repo.FullName`  
 String literal, provides the full name of the repository. [DRONE_REPO](https://docs.drone.io/reference/environ/drone-repo/)  
 
