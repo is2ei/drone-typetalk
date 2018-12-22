@@ -16,6 +16,12 @@ const (
 
 type (
 
+	// Drone contains drone information.
+	Drone struct {
+		IsDrone string
+		Branch  string
+	}
+
 	// Repo contains repository information.
 	Repo struct {
 		FullName   string
@@ -38,16 +44,28 @@ type (
 		Link   string
 	}
 
-	// PostMessageRequestParam contains parameters for POST reqeust
-	PostMessageRequestParam struct {
-		Message      string `json:"message"`
-		ShowLinkMeta bool   `json:"showLinkMeta,omitempty"`
+	// Commit contains current commit information.
+	Commit struct {
+		SHA     string
+		Ref     string
+		Branch  string
+		Author  string
+		Pull    string
+		Message string
 	}
 
 	// Env contains environment variables value.
 	Env struct {
-		Repo  *Repo
-		Build *Build
+		Drone  *Drone
+		Repo   *Repo
+		Build  *Build
+		Commit *Commit
+	}
+
+	// PostMessageRequestParam contains parameters for POST reqeust
+	PostMessageRequestParam struct {
+		Message      string `json:"message"`
+		ShowLinkMeta bool   `json:"showLinkMeta,omitempty"`
 	}
 )
 
@@ -93,6 +111,11 @@ func PostMessage(baseURL, topicID, token string, p *PostMessageRequestParam) (*h
 
 func main() {
 
+	drone := &Drone{
+		IsDrone: os.Getenv("DRONE"),
+		Branch:  os.Getenv("DRONE_BRANCH"),
+	}
+
 	repo := &Repo{
 		FullName:   os.Getenv("DRONE_REPO"),
 		Owner:      os.Getenv("DRONE_REPO_OWNER"),
@@ -112,9 +135,20 @@ func main() {
 		Link:   os.Getenv("DRONE_BUILD_LINK"),
 	}
 
+	commit := &Commit{
+		SHA:     os.Getenv("DRONE_COMMIT_SHA"),
+		Ref:     os.Getenv("DRONE_COMMIT_REF"),
+		Branch:  os.Getenv("DRONE_COMMIT_BRANCH"),
+		Author:  os.Getenv("DRONE_COMMIT_AUTHOR"),
+		Pull:    os.Getenv("DRONE_PULL_REQUEST"),
+		Message: os.Getenv("DRONE_COMMIT_MESSAGE"),
+	}
+
 	env := &Env{
-		Repo:  repo,
-		Build: build,
+		Drone:  drone,
+		Repo:   repo,
+		Build:  build,
+		Commit: commit,
 	}
 
 	var message string
