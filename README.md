@@ -76,6 +76,15 @@ Boolean value, indicates the runtime environment is Drone. [DRONE](https://docs.
 `.Drone.Hostname`  
 String literal, provides the Drone agent hostname. [DRONE_MACHINE](https://docs.drone.io/reference/environ/drone-machine/)  
 
+`.Drone.Hostname`  
+[DRONE_REMOTE_URL](https://docs.drone.io/reference/environ/drone-remote-url/)  
+
+`.System.Host`  
+String literal, provides the Drone server hostname. [DRONE_SYSTEM_HOST](https://docs.drone.io/reference/environ/drone-system-host/)  
+
+`.System.Hostname`  
+String literal, provides the Drone server hostname. [DRONE_SYSTEM_HOSTNAME](https://docs.drone.io/reference/environ/drone-system-hostname/)  
+
 `.Repo.FullName`  
 String literal, provides the full name of the repository. [DRONE_REPO](https://docs.drone.io/reference/environ/drone-repo/)  
 
