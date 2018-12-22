@@ -18,8 +18,9 @@ type (
 
 	// Drone contains drone information.
 	Drone struct {
-		IsDrone string
-		Branch  string
+		IsDrone  string
+		Branch   string
+		Hostname string
 	}
 
 	// Git contains git information.
@@ -44,12 +45,13 @@ type (
 
 	// Build contains build information.
 	Build struct {
-		Created string
-		Event   string
-		Number  string
-		Started string
-		Status  string
-		Link    string
+		Created     string
+		Event       string
+		Number      string
+		Started     string
+		Status      string
+		Link        string
+		PullRequest string
 	}
 
 	// Commit contains current commit information.
@@ -127,8 +129,9 @@ func PostMessage(baseURL, topicID, token string, p *PostMessageRequestParam) (*h
 func main() {
 
 	drone := &Drone{
-		IsDrone: os.Getenv("DRONE"),
-		Branch:  os.Getenv("DRONE_BRANCH"),
+		IsDrone:  os.Getenv("DRONE"),
+		Branch:   os.Getenv("DRONE_BRANCH"),
+		Hostname: os.Getenv("DRONE_MACHINE"),
 	}
 
 	git := &Git{
@@ -149,12 +152,13 @@ func main() {
 	}
 
 	build := &Build{
-		Created: os.Getenv("DRONE_BUILD_CREATED"),
-		Event:   os.Getenv("DRONE_BUILD_EVENT"),
-		Number:  os.Getenv("DRONE_BUILD_NUMBER"),
-		Started: os.Getenv("DRONE_BUILD_STARTED"),
-		Status:  os.Getenv("DRONE_BUILD_STATUS"),
-		Link:    os.Getenv("DRONE_BUILD_LINK"),
+		Created:     os.Getenv("DRONE_BUILD_CREATED"),
+		Event:       os.Getenv("DRONE_BUILD_EVENT"),
+		Number:      os.Getenv("DRONE_BUILD_NUMBER"),
+		Started:     os.Getenv("DRONE_BUILD_STARTED"),
+		Status:      os.Getenv("DRONE_BUILD_STATUS"),
+		Link:        os.Getenv("DRONE_BUILD_LINK"),
+		PullRequest: os.Getenv("DRONE_PULL_REQUEST"),
 	}
 
 	commit := &Commit{
