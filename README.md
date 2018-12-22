@@ -62,11 +62,11 @@ Topic ID to send notification.
 
 `template`
 Overwrite the default message temnplate. 
-It uses `github.com/drone/drone-template-lib/template`.
+It uses `github.com/drone/drone-template-lib/template`.  
 
 `template_raw`  
-Overwrite the default message temnplate. 
-It uses `text/template`
+Overwrite the default message temnplate.  
+It uses `text/template` If both `template` and `template_raw` values are set, `template` value will override the message template.  
 
 ## Template Raw Reference
 
