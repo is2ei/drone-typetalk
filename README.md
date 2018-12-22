@@ -52,6 +52,23 @@ steps:
     status: [ success, failure ]
 ```
 
+Example configuration with a custom message template:
+
+```
+steps:
+- name: typetalk
+  image: is2ei/typetalk
+  settings:
+    typetalk_token: xxxxxxxx
+    topic_id: 12345
+  template: >
+    {{#success build.status}}
+      build {{build.number}} succeeded. Good job.
+    {{else}}
+      build {{build.number}} failed. Fix me please.
+    {{/success}}
+```
+
 ## Parameters Reference
 
 `typetalk_token`  
