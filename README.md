@@ -39,6 +39,19 @@ steps:
       from_secret: topic_id
 ```
 
+Example configuration for success and failure messages:
+
+```
+steps:
+- name: typetalk
+  image: is2ei/typetalk
+  settings:
+    typetalk_token: xxxxxxxx
+    topic_id: 12345
+  when:
+    status: [ success, failure ]
+```
+
 ## Parameters Reference
 
 `typetalk_token`  
