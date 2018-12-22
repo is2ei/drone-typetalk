@@ -57,6 +57,12 @@ steps:
 `typetalk_token`  
 [Typetalk Token](https://developer.nulab-inc.com/docs/typetalk/#tttoken)
 
+`topic_id`  
+Topic ID to send notification.  
+
+`template`  
+Overwrite the default message temnplate.  
+
 ## Template Reference
 
 `.Repo.FullName`  
