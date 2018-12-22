@@ -165,3 +165,36 @@ String literal, provides the tag name for the current build. This value is only 
 
 `.Commit.Commit`  
 String literal, provides the commit sha for the current build. [DRONE_COMMIT](https://docs.drone.io/reference/environ/drone-commit/)  
+
+`.Commit.Message`  
+String literal, provides the commit message for the current build. [DRONE_COMMIT_MESSAGE](https://docs.drone.io/reference/environ/drone-commit-message/)  
+
+`.Commit.After`  
+String literal, provides the commit sha for the current build. [DRONE_COMMIT_AFTER](https://docs.drone.io/reference/environ/drone-commit-after/)  
+
+`.Commit.Author`  
+String literal, provides the author username for the current commit. [DRONE_COMMIT_AUTHOR](https://docs.drone.io/reference/environ/drone-commit-author/)  
+
+`.Commit.AuthorAvatar`  
+String literal, provides the author avatar for the current commit. [DRONE_COMMIT_AUTHOR_AVATAR](https://docs.drone.io/reference/environ/drone-commit-author-avatar/)  
+
+`.Commit.AuthorEmail`  
+String literal, provides the author email for the current commit. [DRONE_COMMIT_AUTHOR_EMAIL](https://docs.drone.io/reference/environ/drone-commit-author-email/)  
+
+`.Commit.AuthorName`  
+String literal, provides the author name for the current commit. [DRONE_COMMIT_AUTHOR_NAME](https://docs.drone.io/reference/environ/drone-commit-author-name/)  
+
+`.Commit.Before`  
+String literal, provides the parent commit sha for the current build. [DRONE_COMMIT_BEFORE](https://docs.drone.io/reference/environ/drone-commit-before/)  
+
+`.Commit.Branch`  
+String literal, provides the branch for the current build. [DRONE_COMMIT_BRANCH](https://docs.drone.io/reference/environ/drone-commit-branch/)  
+
+`.Commit.Link`  
+String literal, provides the http link to the current commit in the remote source code management system (e.g. GitHub). [DRONE_COMMIT_LINK](https://docs.drone.io/reference/environ/drone-commit-link/)
+
+`.Commit.SHA`  
+String literal, provides the commit sha for the current build. [DRONE_COMMIT_SHA](https://docs.drone.io/reference/environ/drone-commit-sha/)  
+
+`.Commit.Ref`  
+String literal, provides the reference for the current build. [DRONE_COMMIT_REF](https://docs.drone.io/reference/environ/drone-commit-ref/)  
