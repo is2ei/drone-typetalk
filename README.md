@@ -30,3 +30,8 @@ steps:
 
 `typetalk_token`  
 [Typetalk Token](https://developer.nulab-inc.com/docs/typetalk/#tttoken)
+
+## Template Reference
+
+`.Build.Number`  
+[Integer value, provides the current build number.](https://docs.drone.io/reference/environ/drone-build-number/)
