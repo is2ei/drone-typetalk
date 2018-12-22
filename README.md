@@ -68,133 +68,133 @@ It uses `github.com/drone/drone-template-lib/template`.
 Overwrite the default message temnplate.  
 It uses `text/template` If both `template` and `template_raw` values are set, `template` value will override the message template.  
 
-## Template Raw Reference
+## Template Reference
 
-`.Drone.IsDrone`  
+`drone.isDrone`  
 Boolean value, indicates the runtime environment is Drone. [DRONE](https://docs.drone.io/reference/environ/drone/)  
 
-`.Drone.Hostname`  
+`drone.hostname`  
 String literal, provides the Drone agent hostname. [DRONE_MACHINE](https://docs.drone.io/reference/environ/drone-machine/)  
 
-`.Drone.Hostname`  
+`drone.remoteURL`  
 [DRONE_REMOTE_URL](https://docs.drone.io/reference/environ/drone-remote-url/)  
 
-`.System.Host`  
+`system.host`  
 String literal, provides the Drone server hostname. [DRONE_SYSTEM_HOST](https://docs.drone.io/reference/environ/drone-system-host/)  
 
-`.System.Hostname`  
+`system.hostname`  
 String literal, provides the Drone server hostname. [DRONE_SYSTEM_HOSTNAME](https://docs.drone.io/reference/environ/drone-system-hostname/)  
 
-`.System.Version`  
+`system.version`  
 String literal, provides the Drone server version. [DRONE_SYSTEM_VERSION](https://docs.drone.io/reference/environ/drone-system-version/)  
 
-`.Runner.Host`  
+`runner.host`  
 String literal, provides the Drone agent hostname. [DRONE_RUNNER_HOST](https://docs.drone.io/reference/environ/drone-runner-host/)  
 
-`.Runner.Hostname`  
+`runner.hostname`  
 String literal, provides the Drone agent hostname. [DRONE_RUNNER_HOSTNAME](https://docs.drone.io/reference/environ/drone-runner-hostname/)  
 
-`.Runner.Platform`  
+`runner.platform`  
 String literal, provides the Drone agent os and architecture. [DRONE_RUNNER_PLATFORM](https://docs.drone.io/reference/environ/drone-runner-platform/)  
 
-`.Runner.Label`  
+`runner.label`  
 [DRONE_RUNNER_LABEL](https://docs.drone.io/reference/environ/drone-runner-label/)  
 
-`.Git.HTTPURL`  
+`git.HTTPURL`  
 String literal, provides the repository git+http url. [DRONE_GIT_HTTP_URL](https://docs.drone.io/reference/environ/drone-git-http-url/)  
 
-`.Git.SSHURL`  
+`git.SSHURL`  
 String literal, provides the repository git+ssh url. [DRONE_GIT_SSH_URL](https://docs.drone.io/reference/environ/drone-git-ssh-url/)  
 
-`.Repo.FullName`  
+`repo.fullName`  
 String literal, provides the full name of the repository. [DRONE_REPO](https://docs.drone.io/reference/environ/drone-repo/)  
 
-`.Repo.Owner`  
+`repo.owner`  
 repository owner DRONE_REPO_OWNER  
 
-`.Repo.Name`  
+`repo.name`  
 String literal, provides the repository name. [DRONE_REPO_NAME](https://docs.drone.io/reference/environ/drone-repo-name/)  
 
-`.Repo.Branch`  
+`repo.branch`  
 String literal, provides the default repository branch (e.g. master). [DRONE_REPO_BRANCH](https://docs.drone.io/reference/environ/drone-repo-branch/)  
 
-`.Repo.Link`  
+`repo.link`  
 String literal, provides the repository http link. [DRONE_REPO_LINK](https://docs.drone.io/reference/environ/drone-repo-link/)  
 
-`.Repo.NameSpace`  
+`repo.nameSpace`  
 String literal, provides the repository namespace (e.g. account owner) [DRONE_REPO_NAMESPACE](https://docs.drone.io/reference/environ/drone-repo-namespace/)  
 
-`.Repo.Private`  
+`repo.private`  
 Boolean value, indicates the repository is public or private. [DRONE_REPO_PRIVATE](https://docs.drone.io/reference/environ/drone-repo-private/)  
 
-`.Repo.SCM`  
+`repo.SCM`  
 String literal, provides the repository version control system. [DRONE_REPO_SCM](String literal, provides the repository version control system.)  
 
-`.Build.Branch`  
+`build.branch`  
 String literal, provides the branch for the current build. [DRONE_BRANCH](https://docs.drone.io/reference/environ/drone-branch/)  
 
-`.Build.Created`  
+`build.created`  
 Unix timestamp, provides the date and time when the build was created in the system. [DRONE_BUILD_CREATED](https://docs.drone.io/reference/environ/drone-build-created/)  
 
-`.Build.Event`  
+`build.event`  
 build event type enumeration, one of `push`, `pull_request`, `tag`, `deployment`  
 
-`.Build.Number`  
+`build.number`  
 Integer value, provides the current build number. [DRONE_BUILD_NUMBER](https://docs.drone.io/reference/environ/drone-build-number/)  
 
-`.Build.Started`  
+`build.started`  
 Unix timestamp, provides the date and time when the build was started. [DRONE_BUILD_STARTED](https://docs.drone.io/reference/environ/drone-build-started/)  
 
-`.Build.Status`  
+`build.status`  
 build status type enumeration, either `success` or `failure` DRONE_BUILD_STATUS  
 
-`.Build.Link`  
+`build.link`  
 DRONE_BUILD_LINK  
 
-`.Build.PullRequest`  
+`build.pullRequest`  
 Integer value, provides the pull request number for the current build. This value is only set if the build event is of type pull request. [DRONE_PULL_REQUEST](https://docs.drone.io/reference/environ/drone-pull-request/)  
 
-`.Build.SourceBranch`  
+`build.sourceBranch`  
 String literal, provides the source branch for a pull request. [DRONE_SOURCE_BRANCH](https://docs.drone.io/reference/environ/drone-source-branch/)  
 
-`.Build.TargetBranch`  
+`build.targetBranch`  
 String literal, provides the target branch for a pull request. [DRONE_TARGET_BRANCH](https://docs.drone.io/reference/environ/drone-target-branch/)  
 
-`.Build.Tag`  
+`build.tag`  
 String literal, provides the tag name for the current build. This value is only set if the build event is of type tag. [DRONE_TAG](https://docs.drone.io/reference/environ/drone-tag/)  
 
-`.Commit.Commit`  
+`commit.commit`  
 String literal, provides the commit sha for the current build. [DRONE_COMMIT](https://docs.drone.io/reference/environ/drone-commit/)  
 
-`.Commit.Message`  
+`commit.message`  
 String literal, provides the commit message for the current build. [DRONE_COMMIT_MESSAGE](https://docs.drone.io/reference/environ/drone-commit-message/)  
 
-`.Commit.After`  
+`commit.after`  
 String literal, provides the commit sha for the current build. [DRONE_COMMIT_AFTER](https://docs.drone.io/reference/environ/drone-commit-after/)  
 
-`.Commit.Author`  
+`commit.author`  
 String literal, provides the author username for the current commit. [DRONE_COMMIT_AUTHOR](https://docs.drone.io/reference/environ/drone-commit-author/)  
 
-`.Commit.AuthorAvatar`  
+`commit.authorAvatar`  
 String literal, provides the author avatar for the current commit. [DRONE_COMMIT_AUTHOR_AVATAR](https://docs.drone.io/reference/environ/drone-commit-author-avatar/)  
 
-`.Commit.AuthorEmail`  
+`commit.authorEmail`  
 String literal, provides the author email for the current commit. [DRONE_COMMIT_AUTHOR_EMAIL](https://docs.drone.io/reference/environ/drone-commit-author-email/)  
 
-`.Commit.AuthorName`  
+`commit.authorName`  
 String literal, provides the author name for the current commit. [DRONE_COMMIT_AUTHOR_NAME](https://docs.drone.io/reference/environ/drone-commit-author-name/)  
 
-`.Commit.Before`  
+`commit.before`  
 String literal, provides the parent commit sha for the current build. [DRONE_COMMIT_BEFORE](https://docs.drone.io/reference/environ/drone-commit-before/)  
 
-`.Commit.Branch`  
+`commit.branch`  
 String literal, provides the branch for the current build. [DRONE_COMMIT_BRANCH](https://docs.drone.io/reference/environ/drone-commit-branch/)  
 
-`.Commit.Link`  
+`commit.link`  
 String literal, provides the http link to the current commit in the remote source code management system (e.g. GitHub). [DRONE_COMMIT_LINK](https://docs.drone.io/reference/environ/drone-commit-link/)
 
-`.Commit.SHA`  
+`commit.SHA`  
 String literal, provides the commit sha for the current build. [DRONE_COMMIT_SHA](https://docs.drone.io/reference/environ/drone-commit-sha/)  
 
-`.Commit.Ref`  
+`commit.ref`  
 String literal, provides the reference for the current build. [DRONE_COMMIT_REF](https://docs.drone.io/reference/environ/drone-commit-ref/)  
