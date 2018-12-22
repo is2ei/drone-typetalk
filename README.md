@@ -60,10 +60,10 @@ steps:
 `topic_id`  
 Topic ID to send notification.  
 
-`template`  
+`template_raw`  
 Overwrite the default message temnplate.  
 
-## Template Reference
+## Template Raw Reference
 
 `.Repo.FullName`  
 String literal, provides the full name of the repository. [DRONE_REPO](https://docs.drone.io/reference/environ/drone-repo/)  

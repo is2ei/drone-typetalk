@@ -18,9 +18,24 @@ type (
 
 	// Drone contains drone information.
 	Drone struct {
-		IsDrone  string
-		Branch   string
+		IsDrone   string
+		Hostname  string
+		RemoteURL string
+	}
+
+	// System contains drone server information.
+	System struct {
+		Host     string
 		Hostname string
+		Version  string
+	}
+
+	// Runner contains drone agent information.
+	Runner struct {
+		Host     string
+		Hostname string
+		Platform string
+		Label    string
 	}
 
 	// Git contains git information.
@@ -45,13 +60,17 @@ type (
 
 	// Build contains build information.
 	Build struct {
-		Created     string
-		Event       string
-		Number      string
-		Started     string
-		Status      string
-		Link        string
-		PullRequest string
+		Branch       string
+		Created      string
+		Event        string
+		Number       string
+		Started      string
+		Status       string
+		Link         string
+		PullRequest  string
+		SourceBranch string
+		TargetBranch string
+		Tag          string
 	}
 
 	// Commit contains current commit information.
@@ -73,6 +92,8 @@ type (
 	// Env contains environment variables value.
 	Env struct {
 		Drone  *Drone
+		System *System
+		Runner *Runner
 		Git    *Git
 		Repo   *Repo
 		Build  *Build
@@ -129,9 +150,22 @@ func PostMessage(baseURL, topicID, token string, p *PostMessageRequestParam) (*h
 func main() {
 
 	drone := &Drone{
-		IsDrone:  os.Getenv("DRONE"),
-		Branch:   os.Getenv("DRONE_BRANCH"),
-		Hostname: os.Getenv("DRONE_MACHINE"),
+		IsDrone:   os.Getenv("DRONE"),
+		Hostname:  os.Getenv("DRONE_MACHINE"),
+		RemoteURL: os.Getenv("DRONE_REMOTE_URL"),
+	}
+
+	system := &System{
+		Host:     os.Getenv("DRONE_SYSTEM_HOST"),
+		Hostname: os.Getenv("DRONE_SYSTEM_HOSTNAME"),
+		Version:  os.Getenv("DRONE_SYSTEM_VERSION"),
+	}
+
+	runner := &Runner{
+		Host:     os.Getenv("DRONE_RUNNER_HOST"),
+		Hostname: os.Getenv("DRONE_RUNNER_HOSTNAME"),
+		Platform: os.Getenv("DRONE_RUNNER_PLATFORM"),
+		Label:    os.Getenv("DRONE_RUNNER_LABEL"),
 	}
 
 	git := &Git{
@@ -152,13 +186,17 @@ func main() {
 	}
 
 	build := &Build{
-		Created:     os.Getenv("DRONE_BUILD_CREATED"),
-		Event:       os.Getenv("DRONE_BUILD_EVENT"),
-		Number:      os.Getenv("DRONE_BUILD_NUMBER"),
-		Started:     os.Getenv("DRONE_BUILD_STARTED"),
-		Status:      os.Getenv("DRONE_BUILD_STATUS"),
-		Link:        os.Getenv("DRONE_BUILD_LINK"),
-		PullRequest: os.Getenv("DRONE_PULL_REQUEST"),
+		Created:      os.Getenv("DRONE_BUILD_CREATED"),
+		Event:        os.Getenv("DRONE_BUILD_EVENT"),
+		Number:       os.Getenv("DRONE_BUILD_NUMBER"),
+		Started:      os.Getenv("DRONE_BUILD_STARTED"),
+		Status:       os.Getenv("DRONE_BUILD_STATUS"),
+		Branch:       os.Getenv("DRONE_BRANCH"),
+		Link:         os.Getenv("DRONE_BUILD_LINK"),
+		PullRequest:  os.Getenv("DRONE_PULL_REQUEST"),
+		SourceBranch: os.Getenv("DRONE_SOURCE_BRANCH"),
+		TargetBranch: os.Getenv("DRONE_TARGET_BRANCH"),
+		Tag:          os.Getenv("DRONE_TAG"),
 	}
 
 	commit := &Commit{
@@ -178,6 +216,8 @@ func main() {
 
 	env := &Env{
 		Drone:  drone,
+		System: system,
+		Runner: runner,
 		Repo:   repo,
 		Git:    git,
 		Build:  build,
