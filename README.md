@@ -34,4 +34,4 @@ steps:
 ## Template Reference
 
 `.Build.Number`  
-[Integer value, provides the current build number.](https://docs.drone.io/reference/environ/drone-build-number/)
+Integer value, provides the current build number. [DRONE_BUILD_NUMBER](https://docs.drone.io/reference/environ/drone-build-number/)
