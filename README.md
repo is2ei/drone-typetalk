@@ -85,6 +85,24 @@ String literal, provides the Drone server hostname. [DRONE_SYSTEM_HOST](https://
 `.System.Hostname`  
 String literal, provides the Drone server hostname. [DRONE_SYSTEM_HOSTNAME](https://docs.drone.io/reference/environ/drone-system-hostname/)  
 
+`.System.Version`  
+String literal, provides the Drone server version. [DRONE_SYSTEM_VERSION](https://docs.drone.io/reference/environ/drone-system-version/)  
+
+`.Runner.Host`  
+String literal, provides the Drone agent hostname. [DRONE_RUNNER_HOST](https://docs.drone.io/reference/environ/drone-runner-host/)  
+
+`.Runner.Hostname`  
+String literal, provides the Drone agent hostname. [DRONE_RUNNER_HOSTNAME](https://docs.drone.io/reference/environ/drone-runner-hostname/)  
+
+`.Runner.Platform`  
+String literal, provides the Drone agent os and architecture. [DRONE_RUNNER_PLATFORM](https://docs.drone.io/reference/environ/drone-runner-platform/)  
+
+`.Runner.Label`  
+[DRONE_RUNNER_LABEL](https://docs.drone.io/reference/environ/drone-runner-label/)  
+
+`.Git.HTTPURL`  
+String literal, provides the repository git+http url. [DRONE_GIT_HTTP_URL](https://docs.drone.io/reference/environ/drone-git-http-url/)  
+
 `.Repo.FullName`  
 String literal, provides the full name of the repository. [DRONE_REPO](https://docs.drone.io/reference/environ/drone-repo/)  
 
