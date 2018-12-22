@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"text/template"
 )
 
 const (
@@ -17,17 +18,23 @@ type (
 
 	// Repo contains repository information.
 	Repo struct {
-		Owner    string
-		FullName string
-		Name     string
-		Branch   string
-		Link     string
+		FullName   string
+		Owner      string
+		Name       string
+		Branch     string
+		Link       string
+		HTTPURL    string
+		NameSpace  string
+		Private    string
+		Visibility string
+		SCM        string
 	}
 
 	// Build contains build information.
 	Build struct {
 		Number string
 		Status string
+		Event  string
 		Link   string
 	}
 
@@ -35,6 +42,12 @@ type (
 	PostMessageRequestParam struct {
 		Message      string `json:"message"`
 		ShowLinkMeta bool   `json:"showLinkMeta,omitempty"`
+	}
+
+	// Env contains environment variables value.
+	Env struct {
+		Repo  *Repo
+		Build *Build
 	}
 )
 
@@ -81,24 +94,39 @@ func PostMessage(baseURL, topicID, token string, p *PostMessageRequestParam) (*h
 func main() {
 
 	repo := &Repo{
-		Owner:    os.Getenv("DRONE_REPO_OWNER"),
-		FullName: os.Getenv("DRONE_REPO"),
-		Name:     os.Getenv("DRONE_REPO_NAME"),
-		Branch:   os.Getenv("DRONE_REPO_BRANCH"),
-		Link:     os.Getenv("DRONE_REPO_LINK"),
+		FullName:   os.Getenv("DRONE_REPO"),
+		Owner:      os.Getenv("DRONE_REPO_OWNER"),
+		Name:       os.Getenv("DRONE_REPO_NAME"),
+		Branch:     os.Getenv("DRONE_REPO_BRANCH"),
+		Link:       os.Getenv("DRONE_REPO_LINK"),
+		NameSpace:  os.Getenv("DRONE_REPO_NAMESPACE"),
+		Private:    os.Getenv("DRONE_REPO_PRIVATE"),
+		Visibility: os.Getenv("DRONE_REPO_VISIBILITY"),
+		SCM:        os.Getenv("DRONE_REPO_SCM"),
 	}
 
 	build := &Build{
 		Number: os.Getenv("DRONE_BUILD_NUMBER"),
 		Status: os.Getenv("DRONE_BUILD_STATUS"),
+		Event:  os.Getenv("DRONE_BUILD_EVENT"),
 		Link:   os.Getenv("DRONE_BUILD_LINK"),
+	}
+
+	env := &Env{
+		Repo:  repo,
+		Build: build,
 	}
 
 	var message string
 
-	template := os.Getenv("PLUGIN_TEMPLATE")
-	if template == "" {
+	t := os.Getenv("PLUGIN_TEMPLATE")
+	if t == "" {
 		message = buildDefaultMessage(repo, build)
+	} else {
+		tmpl, _ := template.New("message").Parse(t)
+		var b bytes.Buffer
+		tmpl.Execute(&b, env)
+		message = b.String()
 	}
 
 	p := &PostMessageRequestParam{
