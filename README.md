@@ -71,5 +71,8 @@ String literal, provides the full name of the repository. [DRONE_REPO](https://d
 `.Repo.Owner`  
 repository owner  
 
+`.Repo.Name`  
+repository name  
+
 `.Build.Number`  
 Integer value, provides the current build number. [DRONE_BUILD_NUMBER](https://docs.drone.io/reference/environ/drone-build-number/)  
