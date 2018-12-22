@@ -69,10 +69,13 @@ Overwrite the default message temnplate.
 String literal, provides the full name of the repository. [DRONE_REPO](https://docs.drone.io/reference/environ/drone-repo/)  
 
 `.Repo.Owner`  
-repository owner  
+repository owner DRONE_REPO_OWNE  
 
 `.Repo.Name`  
-repository name  
+repository name DRONE_REPO_NAME  
 
 `.Build.Number`  
 Integer value, provides the current build number. [DRONE_BUILD_NUMBER](https://docs.drone.io/reference/environ/drone-build-number/)  
+
+`.Build.Status`  
+build status type enumeration, either `success` or `failure` DRONE_BUILD_STATUS  
