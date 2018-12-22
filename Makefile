@@ -12,4 +12,6 @@ build:
 	@echo "${GREEN}✔ successfully built.${RESET}\n"
 
 push:
+	@echo "${YELLOW}Pushing...${RESET}"
 	@docker push is2ei/drone-typetalk
+	@echo "${GREEN}✔ successfully pushed.${RESET}\n"

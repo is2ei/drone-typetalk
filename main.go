@@ -22,6 +22,12 @@ type (
 		Branch  string
 	}
 
+	// Git contains git information.
+	Git struct {
+		HTTPURL string
+		SSHURL  string
+	}
+
 	// Repo contains repository information.
 	Repo struct {
 		FullName   string
@@ -38,25 +44,34 @@ type (
 
 	// Build contains build information.
 	Build struct {
-		Number string
-		Status string
-		Event  string
-		Link   string
+		Created string
+		Event   string
+		Number  string
+		Started string
+		Status  string
+		Link    string
 	}
 
 	// Commit contains current commit information.
 	Commit struct {
-		SHA     string
-		Ref     string
-		Branch  string
-		Author  string
-		Pull    string
-		Message string
+		Commit       string
+		After        string
+		Author       string
+		AuthorAvatar string
+		AuthorEmail  string
+		AuthorName   string
+		Before       string
+		Branch       string
+		Link         string
+		SHA          string
+		Ref          string
+		Message      string
 	}
 
 	// Env contains environment variables value.
 	Env struct {
 		Drone  *Drone
+		Git    *Git
 		Repo   *Repo
 		Build  *Build
 		Commit *Commit
@@ -116,6 +131,11 @@ func main() {
 		Branch:  os.Getenv("DRONE_BRANCH"),
 	}
 
+	git := &Git{
+		HTTPURL: os.Getenv("DRONE_GIT_HTTP_URL"),
+		SSHURL:  os.Getenv("DRONE_GIT_SSH_URL"),
+	}
+
 	repo := &Repo{
 		FullName:   os.Getenv("DRONE_REPO"),
 		Owner:      os.Getenv("DRONE_REPO_OWNER"),
@@ -129,35 +149,44 @@ func main() {
 	}
 
 	build := &Build{
-		Number: os.Getenv("DRONE_BUILD_NUMBER"),
-		Status: os.Getenv("DRONE_BUILD_STATUS"),
-		Event:  os.Getenv("DRONE_BUILD_EVENT"),
-		Link:   os.Getenv("DRONE_BUILD_LINK"),
+		Created: os.Getenv("DRONE_BUILD_CREATED"),
+		Event:   os.Getenv("DRONE_BUILD_EVENT"),
+		Number:  os.Getenv("DRONE_BUILD_NUMBER"),
+		Started: os.Getenv("DRONE_BUILD_STARTED"),
+		Status:  os.Getenv("DRONE_BUILD_STATUS"),
+		Link:    os.Getenv("DRONE_BUILD_LINK"),
 	}
 
 	commit := &Commit{
-		SHA:     os.Getenv("DRONE_COMMIT_SHA"),
-		Ref:     os.Getenv("DRONE_COMMIT_REF"),
-		Branch:  os.Getenv("DRONE_COMMIT_BRANCH"),
-		Author:  os.Getenv("DRONE_COMMIT_AUTHOR"),
-		Pull:    os.Getenv("DRONE_PULL_REQUEST"),
-		Message: os.Getenv("DRONE_COMMIT_MESSAGE"),
+		Commit:       os.Getenv("DRONE_COMMIT"),
+		Message:      os.Getenv("DRONE_COMMIT_MESSAGE"),
+		After:        os.Getenv("DRONE_COMMIT_AFTER"),
+		Author:       os.Getenv("DRONE_COMMIT_AUTHOR"),
+		AuthorAvatar: os.Getenv("DRONE_COMMIT_AUTHOR_AVATAR"),
+		AuthorEmail:  os.Getenv("DRONE_COMMIT_AUTHOR_EMAIL"),
+		AuthorName:   os.Getenv("DRONE_COMMIT_AUTHOR_NAME"),
+		Before:       os.Getenv("DRONE_COMMIT_BEFORE"),
+		Branch:       os.Getenv("DRONE_COMMIT_BRANCH"),
+		Link:         os.Getenv("DRONE_COMMIT_LINK"),
+		SHA:          os.Getenv("DRONE_COMMIT_SHA"),
+		Ref:          os.Getenv("DRONE_COMMIT_REF"),
 	}
 
 	env := &Env{
 		Drone:  drone,
 		Repo:   repo,
+		Git:    git,
 		Build:  build,
 		Commit: commit,
 	}
 
 	var message string
 
-	t := os.Getenv("PLUGIN_TEMPLATE")
-	if t == "" {
+	tRaw := os.Getenv("PLUGIN_TEMPLATE_RAW")
+	if tRaw == "" {
 		message = buildDefaultMessage(repo, build)
 	} else {
-		tmpl, _ := template.New("message").Parse(t)
+		tmpl, _ := template.New("message").Parse(tRaw)
 		var b bytes.Buffer
 		tmpl.Execute(&b, env)
 		message = b.String()
