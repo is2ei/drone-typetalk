@@ -103,6 +103,9 @@ String literal, provides the Drone agent os and architecture. [DRONE_RUNNER_PLAT
 `.Git.HTTPURL`  
 String literal, provides the repository git+http url. [DRONE_GIT_HTTP_URL](https://docs.drone.io/reference/environ/drone-git-http-url/)  
 
+`.Git.SSHURL`  
+String literal, provides the repository git+ssh url. [DRONE_GIT_SSH_URL](https://docs.drone.io/reference/environ/drone-git-ssh-url/)  
+
 `.Repo.FullName`  
 String literal, provides the full name of the repository. [DRONE_REPO](https://docs.drone.io/reference/environ/drone-repo/)  
 
@@ -110,7 +113,16 @@ String literal, provides the full name of the repository. [DRONE_REPO](https://d
 repository owner DRONE_REPO_OWNER  
 
 `.Repo.Name`  
-repository name DRONE_REPO_NAME  
+String literal, provides the repository name. [DRONE_REPO_NAME](https://docs.drone.io/reference/environ/drone-repo-name/)  
+
+`.Repo.Branch`  
+String literal, provides the default repository branch (e.g. master). [DRONE_REPO_BRANCH](https://docs.drone.io/reference/environ/drone-repo-branch/)  
+
+`.Repo.Link`  
+String literal, provides the repository http link. [DRONE_REPO_LINK](https://docs.drone.io/reference/environ/drone-repo-link/)  
+
+`.Repo.NameSpace`  
+String literal, provides the repository namespace (e.g. account owner) [DRONE_REPO_NAMESPACE](https://docs.drone.io/reference/environ/drone-repo-namespace/)  
 
 `.Build.Status`  
 build status type enumeration, either `success` or `failure` DRONE_BUILD_STATUS  
