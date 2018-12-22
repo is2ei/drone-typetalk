@@ -8,6 +8,8 @@ import (
 	"net/http"
 	"os"
 	"text/template"
+
+	droneTemplate "github.com/drone/drone-template-lib/template"
 )
 
 const (
@@ -226,9 +228,12 @@ func main() {
 
 	var message string
 
+	t := os.Getenv("PLUGIN_TEMPLATE")
 	tRaw := os.Getenv("PLUGIN_TEMPLATE_RAW")
-	if tRaw == "" {
+	if t == "" && tRaw == "" {
 		message = buildDefaultMessage(repo, build)
+	} else if t != "" {
+		message, _ = droneTemplate.RenderTrim(t, env)
 	} else {
 		tmpl, _ := template.New("message").Parse(tRaw)
 		var b bytes.Buffer

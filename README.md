@@ -60,8 +60,13 @@ steps:
 `topic_id`  
 Topic ID to send notification.  
 
+`template`
+Overwrite the default message temnplate. 
+It uses `github.com/drone/drone-template-lib/template`.
+
 `template_raw`  
-Overwrite the default message temnplate.  
+Overwrite the default message temnplate. 
+It uses `text/template`
 
 ## Template Raw Reference
 
