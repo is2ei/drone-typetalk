@@ -1,5 +1,7 @@
 # drone-typetalk
 
+[![Join the chat at https://gitter.im/is2ei/drone-typetalk](https://badges.gitter.im/is2ei/drone-typetalk.svg)](https://gitter.im/is2ei/drone-typetalk?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Drone plugin for sending Typetalk notifications.
 
 | Badge | Description |
